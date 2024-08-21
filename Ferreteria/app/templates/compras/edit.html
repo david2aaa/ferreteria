@@ -1,0 +1,35 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='compras/output.css') }}" rel="stylesheet">
+    <title>Editar Compra</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Editar Compra</h1>
+        <form action="{{ url_for('compra.edit', id=compra.id) }}" method="POST" class="form">
+            <label for="fecha" class="form-label">Fecha:</label>
+            <input type="date" name="fecha" value="{{ compra.fecha }}" required class="form-input"><br>
+
+            <label for="precio_total" class="form-label">Precio Total:</label>
+            <input type="text" name="precio_total" value="{{ compra.precio_total }}" required class="form-input"><br>
+
+            <label for="proveedor" class="form-label">Proveedor:</label>
+            <select name="proveedor" required class="form-select">
+                {% for proveedor in datap %}
+                    <option value="{{ proveedor.id }}" {% if proveedor.id == compra.proveedor %}selected{% endif %}>{{ proveedor.nombre }}</option>
+                {% endfor %}
+            </select><br>
+
+            <input type="submit" value="Actualizar" class="form-submit">
+            <a href="{{ url_for('categoria.index') }}" class="btn btn-add">volver</a>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

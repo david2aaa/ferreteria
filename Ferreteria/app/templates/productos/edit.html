@@ -1,0 +1,36 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Editar Producto</h1>
+    <form action="{{ url_for('producto.edit', id=producto.id) }}" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" required><br>
+        
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" name="precio" value="{{ producto.precio }}" step="0.01" required><br>
+
+        <label for="stock">Stock:</label>
+        <input type="number" id="stock" name="stock" value="{{ producto.stock }}" required><br>
+
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" name="categoria" required>
+            {% for categoria in data %}
+                <option value="{{ categoria.nombre }}" {% if categoria.nombre == producto.categoria %}selected{% endif %}>{{ categoria.nombre }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <a href="{{ url_for('producto.index') }}">Volver a la lista</a>
+</body>
+</html>
+{%endblock%}

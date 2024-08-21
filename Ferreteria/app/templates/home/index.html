@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home/style.css') }}">
+    <title>Mi Aplicación</title>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <ul>
+            <li><a href="{{ url_for('categoria.index') }}" class="nav-link">Categorías</a></li>
+            <li><a href="{{ url_for('cliente.index') }}" class="nav-link">Clientes</a></li>
+            <li><a href="{{ url_for('compra.index') }}" class="nav-link">Compras</a></li>
+            <li><a href="{{ url_for('compraProducto.index') }}" class="nav-link">Compra Producto</a></li>
+            <li><a href="{{ url_for('factura.index') }}" class="nav-link">Facturas</a></li>
+            <li><a href="{{ url_for('facturaProducto.index') }}" class="nav-link">Factura Producto</a></li>
+            <li><a href="{{ url_for('producto.index') }}" class="nav-link">Productos</a></li>
+            <li><a href="{{ url_for('proveedor.index') }}" class="nav-link">Proveedores</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        {% block content %}
+        <!-- El contenido específico de cada página se insertará aquí -->
+        {% endblock %}
+    </div>
+</body>
+</html>

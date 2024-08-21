@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+
 db = SQLAlchemy()
 
 def create_app():
@@ -9,11 +10,15 @@ def create_app():
 
     db.init_app(app)
 
+    from app.routes import cliente_routes, provedor_routes, categoria_routes, producto_routes, factura_routes, compra_routes, facturaProducto_routes, compraProducto_routes
 
-    from app.routes import cliente_routes, provedor_routes, categoria_routes, producto_routes, factura_routes
     app.register_blueprint(cliente_routes.bp)
     app.register_blueprint(provedor_routes.bp)
     app.register_blueprint(categoria_routes.bp)
     app.register_blueprint(producto_routes.bp)
     app.register_blueprint(factura_routes.bp)
+    app.register_blueprint(compra_routes.bp)
+    app.register_blueprint(facturaProducto_routes.bp)
+    app.register_blueprint(compraProducto_routes.bp)
+
     return app

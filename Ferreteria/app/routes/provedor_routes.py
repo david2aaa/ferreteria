@@ -4,12 +4,12 @@ from app import db
 
 bp = Blueprint('proveedor', __name__)
 
-@bp.route('/Student')
+@bp.route('/proveedor')
 def index():
     data = Proveedor.query.all()
-    return render_template('provedores/index.html', data=data)
+    return render_template('proveedor/index.html', data=data)
 
-@bp.route('/Proveedor/add', method=['GET', 'POST'])
+@bp.route('/proveedor/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -24,9 +24,9 @@ def add():
         
         return redirect(url_for('proveedor.index'))
     
-    return render_template('proveedores/add.html')
+    return render_template('proveedor/add.html')
 
-@bp.route('/Proveedor/edit/<int:id>', methods=['GET', 'POST'])
+@bp.route('/proveedor/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     proveedor = Proveedor.query.get_or_404(id)
 
@@ -40,13 +40,13 @@ def edit(id):
 
         return redirect(url_for('proveedor.index'))
 
-    return render_template('proveedores/edit.html', proveedor=proveedor)
+    return render_template('proveedor/edit.html', proveedor=proveedor)
 
-@bp.route('/Proveedor/delete/<int:id>')
+@bp.route('/proveedor/delete/<int:id>')
 def delete(id):
     proveedor = Proveedor.query.get_or_404(id)
 
     db.session.delete(proveedor)
     db.session.commit()
 
-    return redirect(url_for('provedor.index'))
+    return redirect(url_for('proveedor.index'))

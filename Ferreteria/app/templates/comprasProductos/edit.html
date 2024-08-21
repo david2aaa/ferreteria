@@ -1,0 +1,36 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='css/output.css') }}" rel="stylesheet">
+    <title>Editar</title>
+</head>
+<body>
+    <h1>Editar Compra de Producto</h1>
+    <form action="{{ url_for('compraProducto.edit', id=compraProducto.id) }}" method="POST">
+        <label for="productos">Producto:</label>
+        <select name="producto_id" id="producto_id" >
+            {% for producto in pdata %}
+                <option value="{{ producto.id }}" {% if producto.id == compraProducto.producto_id %}selected{% endif %}>{{ producto.nombre }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="compras">Compra:</label>
+        <select name="compra_id" id=""compra_id>
+            {% for compra in cdata %}
+                <option value="{{ compra.id }}" {% if compra.id == compraProducto.compras_id %}selected{% endif %}>{{ compra.id }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="cantidad">Cantidad:</label>
+        <input type="text" name="cantidad" value="{{ compraProducto.cantidad }}"><br>
+
+        <input type="submit" value="Actualizar">
+    </form>
+</body>
+</html>
+{%endblock%}

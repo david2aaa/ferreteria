@@ -1,0 +1,41 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    <h1>Lista de Facturas de Productos</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Factura</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+        {% for facturaProducto in data %}
+            <tr>
+                <td>{{ facturaProducto.id }}</td>
+                <td>
+                    {% for producto in pdata %}
+                        {% if producto.id == facturaProducto.productos %}
+                            {{ producto.nombre }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for factura in fdata %}
+                        {% if factura.id == facturaProducto.facturas %}
+                            {{ factura.id }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+                <td>{{ facturaProducto.precio_unitario }}</td>
+                <td>{{ facturaProducto.cantidad }}</td>
+                <td>
+                    <a href="{{ url_for('facturaProducto.edit', id=facturaProducto.id) }}">Editar</a>
+                    <a href="{{ url_for('facturaProducto.delete', id=facturaProducto.id) }}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('facturaProducto.add') }}">Agregar Factura de Producto</a>
+{%endblock%}

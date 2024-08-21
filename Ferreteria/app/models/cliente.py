@@ -7,3 +7,5 @@ class Cliente(db.Model):
     apellido = db.Column(db.String(250), nullable=False)
     telefono = db.Column(db.String(250), nullable=False)
     direccion = db.Column(db.String(250), nullable=False) 
+    
+    factura = db.relationship("Factura", back_populates="cliente")

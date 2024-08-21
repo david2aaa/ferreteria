@@ -1,7 +1,7 @@
 # config.py
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123@localhost:3306/muchos'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:1234@localhost:3306/consultorio'
     #SQLALCHEMY_DATABASE_URI = 'mysql+mysqlclient://root:2hefbFfDEc-HFd1fhc2DhBCCgh-HCB65@monorail.proxy.rlwy.net:20020/Libreria1'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
  

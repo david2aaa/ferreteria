@@ -1,0 +1,76 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Form Styles */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #555;
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #008CBA; /* Blue */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background-color: #007bb5;
+    transform: scale(1.05);
+}
+
+/* Botón Volver */
+.btn-add {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: #6a6f6a; /* Green */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+    margin-top: 20px; /* Espacio adicional en la parte superior */
+}
+
+.btn-add:hover {
+    background-color: #2f3b2f; /* Darker Green */
+    transform: scale(1.05);
+}

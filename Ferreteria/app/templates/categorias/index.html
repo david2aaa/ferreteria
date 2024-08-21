@@ -1,0 +1,42 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='categorias/stly.css') }}">
+    <title>Lista de Categorías</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Categorías</h1>
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in data %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nombre }}</td>
+                        <td>
+                            <a href="{{ url_for('categoria.edit', id=categoria.id) }}" class="btn btn-edit">Editar</a>
+                            <a href="{{ url_for('categoria.delete', id=categoria.id) }}" class="btn btn-delete">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('categoria.add') }}" class="btn btn-add">Agregar Categoría</a>
+    </div>
+</body>
+</html>
+
+{%endblock%}

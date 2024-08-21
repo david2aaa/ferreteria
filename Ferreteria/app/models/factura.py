@@ -2,9 +2,11 @@ from app import db
 
 class Factura(db.Model):
     __tablename__ = 'factura'
-    id = db.Column(db.integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.Date, nullable=False)
     precio_total = db.Column(db.Float, nullable=False)
-    cliente = db.Column(db.Integer, db.ForeingKey('cliente.id'))
-    productos = db.relationship('Producto', secondary='factura_producto')
-    
+    cliente_id = db.Column(db.Integer, db.ForeignKey('cliente.id'))
+
+    # Relaciones
+    cliente = db.relationship('Cliente', back_populates='factura')
+    producto = db.relationship('FacturaProducto', back_populates='factura')

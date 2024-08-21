@@ -1,0 +1,47 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='compras/style.css') }}">
+    <title>Lista de Categorías</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Compras</h1>
+        <table class="purchase-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Fecha</th>
+                    <th>Precio Total</th>
+                    <th>Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for compra in data %}
+                    <tr>
+                        <td>{{ compra.id }}</td>
+                        <td>{{ compra.fecha }}</td>
+                        <td>{{ compra.precio_total }}</td>
+                        <td>{{ compra.proveedor.nombre }}</td>
+                        <td>
+                            <a href="{{ url_for('compra.edit', id=compra.id) }}" class="btn btn-edit">Editar</a>
+                            <a href="{{ url_for('compra.delete', id=compra.id) }}" class="btn btn-delete">Eliminar</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="links">
+            <a href="{{ url_for('compra.add') }}" class="btn btn-add">Agregar Compras</a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

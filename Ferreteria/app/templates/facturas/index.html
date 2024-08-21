@@ -1,0 +1,28 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    <h1>Lista de facturas</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Fecha</th>
+            <th>Precio total</th>
+            <th>cliente</th>
+            <th>Productos</th>
+        </tr>
+        {% for factura in data %}
+            <tr>
+                <td>{{ factura.id }}</td>
+                <td>{{ factura.fecha }}</td>
+                <td>{{ factura.precio_total }}</td>
+                <td>{{ factura.cliente.nombre }}</td>
+                <td>
+                    <a href="{{ url_for('factura.edit', id=factura.id) }}">Editar</a>
+                    <a href="{{ url_for('factura.delete', id=factura.id) }}">Eliminar</a>
+                    <!-- Agrega aquí el enlace para eliminar -->
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('factura.add') }}">Agregar clientes</a>
+{%endblock%}

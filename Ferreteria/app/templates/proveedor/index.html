@@ -1,0 +1,30 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    <h1>Lista de proveedores</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>direccion</th>
+            <th>telefono</th>
+            <th>correo</th>
+        </tr>
+        {% for proveedor in data %}
+            <tr>
+                <td>{{ proveedor.id }}</td>
+                <td>{{ proveedor.nombre }}</td>
+                <td>{{ proveedor.direccion }}</td>
+                <td>{{ proveedor.telefono }}</td>
+                <td>{{ proveedor.correo }}</td>
+                <td>
+                    <a href="{{ url_for('proveedor.edit', id=proveedor.id) }}">Editar</a>
+                    <a href="{{ url_for('proveedor.delete', id=proveedor.id) }}">Eliminar</a>
+                    <!-- Agrega aquí el enlace para eliminar -->
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('proveedor.add') }}">Agregar proveedor</a>
+
+{%endblock%}

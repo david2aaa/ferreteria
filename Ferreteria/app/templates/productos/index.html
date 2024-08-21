@@ -1,0 +1,38 @@
+{% extends "home/index.html" %}
+
+{% block content %}
+    <h1>Lista de productos</h1>
+    
+    <!-- Formulario de búsqueda -->
+    <form method="GET" action="{{ url_for('producto.index') }}">
+        <input type="text" name="query" placeholder="Buscar producto" value="{{ request.args.get('query', '') }}">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Tabla de productos -->
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Acciones</th>
+        </tr>
+        {% for producto in data %}
+            <tr>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.categoria.nombre }}</td>
+                <td>
+                    <a href="{{ url_for('producto.edit', id=producto.id) }}">Editar</a>
+                    <a href="{{ url_for('producto.delete', id=producto.id) }}">Eliminar</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <a href="{{ url_for('producto.add') }}">Agregar producto</a>
+{%endblock%}

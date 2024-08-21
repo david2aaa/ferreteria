@@ -4,12 +4,12 @@ from app import db
 
 bp = Blueprint('cliente', __name__)
 
-@bp.route('/Cliente')
+@bp.route('/cliente')
 def index():
     data = Cliente.query.all()
     return render_template('clientes/index.html', data=data)
 
-@bp.route('/Cliente/add', method=['GET', 'POST'])
+@bp.route('/Cliente/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
         nombre = request.form['nombre']

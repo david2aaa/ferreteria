@@ -4,12 +4,16 @@ from app import db
 
 bp = Blueprint('categoria', __name__)
 
-@bp.route('/Student')
+@bp.route('/')
+def home():
+    return render_template('home/index.html')
+
+@bp.route('/categoria')
 def index():
     data = Categoria.query.all()
-    return render_template('clientes/index.html', data=data)
+    return render_template('categorias/index.html', data=data)
 
-@bp.route('/Categoria/add', method=['GET','POST'])
+@bp.route('/categoria/add', methods=['GET', 'POST'])
 def add():
     if request.method == 'POST':
         nombre = request.form['nombre']
@@ -21,9 +25,9 @@ def add():
         
         return redirect(url_for('categoria.index'))
     
-    return render_template('clientes/add.html')
+    return render_template('categorias/add.html')
 
-@bp.route('/Cliente/edit/<int:id>', methods=['GET', 'POST'])
+@bp.route('/categoria/edit/<int:id>', methods=['GET', 'POST'])
 def edit(id):
     categoria = Categoria.query.get_or_404(id)
     
@@ -36,7 +40,7 @@ def edit(id):
     
     return render_template('categorias/edit.html', categoria=categoria)
 
-@bp.route('/Cliente/delete/<int:id>')
+@bp.route('/categoria/delete/<int:id>')
 def delete(id):
     categoria = Categoria.query.get_or_404(id)
 

@@ -7,19 +7,22 @@ bp = Blueprint('producto', __name__)
 
 @bp.route('/Producto')
 def index():
-    data = Producto.query.all()
-    return render_template('/productos/index.html', data=data)
+    query = request.args.get('query')
+    if query:
+        data = Producto.query.filter(Producto.nombre.ilike(f'%{query}%')).all()
+    else:
+        data = Producto.query.all()
+    return render_template('productos/index.html', data=data)
 
-@bp.route('/Producto/add', method=['GET','POST'])
+@bp.route('/Producto/add', methods=['GET','POST'])
 def add():
     if request.method == 'POST':
         nombre = request.form['nombre']
-        descripcion = request.form['descripcion']
         precio = request.form['precio']
         stock = request.form['stock']
         categoria = request.form['categoria']
         
-        newProducto = Producto(nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, categoria=categoria)
+        newProducto = Producto(nombre=nombre, precio=precio, stock=stock, categoria_id=categoria)
         
         db.session.add(newProducto)
         db.session.commit()
@@ -34,10 +37,9 @@ def edit(id):
 
     if request.method == 'POST':
         producto.nombre = request.form['nombre']
-        producto.descripcion = request.form['descripcion']
-        producto.precio = request.form['precio']
+        producto.precio = float(request.form['precio'])
         producto.stock = request.form['stock']
-        producto.categoria = request.form['categoria']
+        producto.categoria_id = request.form['categoria']
         
         db.session.commit()
 

@@ -10,14 +10,14 @@ def index():
     data = Factura.query.all()
     return render_template('/facturas/index.html', data=data)
 
-@bp.route('/Factura/add', method=['GET','POST'])
+@bp.route('/Factura/add', methods=['GET','POST'])
 def add():
     if request.method == 'POST':
         fecha = request.form['fecha']
         precio_total = request.form['precio_total']
         cliente = request.form['cliente']
         
-        newFactura = Factura(fecha=fecha, precio_total=precio_total, cliente=cliente)
+        newFactura = Factura(fecha=fecha, precio_total=precio_total, cliente_id=cliente)
         
         db.session.add(newFactura)
         db.session.commit()
@@ -33,3 +33,19 @@ def edit(id):
     if request.method == 'POST':
         factura.fecha = request.form['fecha']
         factura.precio_total = request.form['precio_total']
+        factura.cliente.id = request.form['cliente']
+        
+        db.session.commit()
+        
+        return redirect(url_for('factura.index'))
+    
+    return render_template('facturas/edit.html', factura=factura)
+
+@bp.route('/Factura/delete/<int:id>')
+def delete(id):
+    factura = Factura.query.get_or_404(id)
+
+    db.session.delete(factura)
+    db.session.commit()
+
+    return redirect(url_for('factura.index'))
